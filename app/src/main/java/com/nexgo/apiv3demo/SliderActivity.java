@@ -2,6 +2,7 @@ package com.nexgo.apiv3demo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.hardware.TriggerEventListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -75,9 +76,8 @@ public class SliderActivity extends Activity {
         runnable.run();
 
         scanner2.start(listener);
+        scanner2.flashTrigger(true);
     }
-
-
 
     OnScannerListener listener = new OnScannerListener() {
         @Override

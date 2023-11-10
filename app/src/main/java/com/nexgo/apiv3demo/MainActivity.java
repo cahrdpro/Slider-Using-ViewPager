@@ -110,11 +110,10 @@ public class MainActivity extends Activity {
         entity.setUsedFrontCcd(false);
 
 
-        scanner.initScanner(entity, listener);
+        //scanner.initScanner(entity, listener);
 
         scanner2 = deviceEngine.getScanner2();
         scanner2.initScanner(entity, Collections.singleton(SymbolEnum.QR));
-        LightModeEnum lightModeEnum;
 
         ledDriver = deviceEngine.getLEDDriver();
         beep = deviceEngine.getBeeper();
@@ -313,15 +312,23 @@ public class MainActivity extends Activity {
 
     //void setLed(MdbLightModeEnum light, boolean isOn)
 
+    public void metodo_aqui(){
+
+    }
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.open_mdb:
+                scanner2.flashTrigger(true);
                 scanner2.start(listener);
+
+                //cambio aqui
                 //ledDriver2.setLed(MdbLightModeEnum.MAG_RED, true);
                 //mlog.debug("start to open mdb!!");
                 //beep.beep(1000);
                 //scanner.startScan(60, listener);
-                //ledDriver.setLed(LightModeEnum.BLUE, true);
+
+                //ledDriver.seted(LightModeEnum.BLUE, true);
 
                 //MdbServiceManager.getInstance().onStart(getApplicationContext(),
                 //        paymentAppInfo,
@@ -332,9 +339,9 @@ public class MainActivity extends Activity {
                 //btnOpenMdb.setEnabled(false);
                 break;
             case R.id.close_mdb:
-                scanner2.stop();
+                //scanner2.stop();
                 //ledDriver2.setLed(MdbLightModeEnum.MAG_RED, false);
-                //scanner.stopScan();
+                scanner.stopScan();
                 //ledDriver.setLed(LightModeEnum.BLUE, false);
                 //mlog.debug("close mdb!!");
                 //GData.getInstance().setTrading(false);
