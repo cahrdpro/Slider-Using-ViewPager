@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -195,8 +196,11 @@ public class EmvActivity2 extends Activity implements OnCardInfoListener, OnEmvP
         switch (view.getId()) {
             case R.id.btnCancelarVenta:
                 Log.i(strTag, "Evento clic boton cancelar 1");
-                emvHandler2.emvProcessCancel();
-                emvHandler2 = null;
+                Intent intent=new Intent();
+                intent.putExtra("MESSAGE","message");
+                setResult(2,intent);
+                //emvHandler2.emvProcessCancel();
+                //emvHandler2 = null;
                 Log.i(strTag, "Evento clic boton cancelar 3");
                 break;
         }
@@ -212,6 +216,7 @@ public class EmvActivity2 extends Activity implements OnCardInfoListener, OnEmvP
         cardReader.searchCard(slotTypes, 60, this);
         Toast.makeText(EmvActivity2.this, "please swipe,insert or tap card", Toast.LENGTH_SHORT).show();
     }
+
     String amount ;
 
     private CardSlotTypeEnum mExistSlot;
@@ -349,7 +354,6 @@ public class EmvActivity2 extends Activity implements OnCardInfoListener, OnEmvP
 
         emvHandler2.setDynamicReaderLimitListForExpressPay(defaultDynamicReaderLimitEntity, dynamicReaderLimitEntities);
     }
-
 
     private void setPaywaveDrl() {
         List<DynamicReaderLimitEntity> dynamicReaderLimitEntity = new ArrayList<>();
@@ -920,7 +924,19 @@ public class EmvActivity2 extends Activity implements OnCardInfoListener, OnEmvP
         mlog.debug("code:{}",code);
         MdbServiceManager.getInstance().setPayResult(code);
         Log.i("pruebasx", "code:" + code + " aqui termina la aplicacion...");
+        //Intent data = new Intent();
+        //data.setData(Uri.parse("2"));
+        //setResult(RESULT_OK, data);
 
+        //Intent returnIntent = getIntent();
+        //returnIntent.putExtra("result",Uri.parse("2"));
+        Log.i(strTag, "setResult after");
+        String message="OOKOK";
+        Intent intent=new Intent();
+        intent.putExtra("MESSAGE",message);
+        setResult(2,intent);
+        //setResult(Activity.RESULT_OK,returnIntent);
+        Log.i(strTag, "setResult before");
         finish();
     }
     private int cardReaderTest(int retCode, CardInfoEntity cardInfo) {

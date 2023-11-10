@@ -52,7 +52,7 @@ import cn.nexgo.mdbclient.constant.TransParam;
 import cn.nexgo.mdbclient.constant.TransResult;
 import cn.nexgo.mdbclient.constant.VendResult;
 
-public class MainActivity extends Activity implements OnScannerListener {
+public class MainActivity extends Activity {
     private DeviceEngine deviceEngine;
     LEDDriver ledDriver;
     Scanner scanner;
@@ -156,6 +156,7 @@ public class MainActivity extends Activity implements OnScannerListener {
         @Override
         public void onScannerResult(int i, String s) {
             Log.d(strTag, "onScannerResult > i: " + i + " result: " + s);
+
             beep.beep(1000);
 
             Intent saleIntent = new Intent(MainActivity.this, EmvActivity2.class);
@@ -357,24 +358,5 @@ public class MainActivity extends Activity implements OnScannerListener {
     public void onStop() {
         super.onStop();
         mlog.debug("call onStop()");
-    }
-
-    @Override
-    public void onInitResult(int i) {
-        Log.d(strTag, "i = " + i);
-        switch (i){
-            case SdkResult.Success:
-                Log.d(strTag, "Operacion OK");
-                break;
-            case SdkResult.Fail:
-                Log.d(strTag, "Fallo la lectura");
-                break;
-        }
-
-    }
-
-    @Override
-    public void onScannerResult(int i, String s) {
-        Log.d(strTag, "i = " + i + " data = " + s);
     }
 }
